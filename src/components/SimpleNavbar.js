@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import imgLogo from '../imgs/logotemp.jpg'
 
@@ -37,7 +38,7 @@ const LogoDiv = styled.div`
     align-content: center;
 `
 
-// NavButtons
+// Nav
 const NavDiv = styled.div`
     display: flex;
     align-items: center;
@@ -45,7 +46,7 @@ const NavDiv = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     @media (max-width: 768px) {
-    display: none;  // Show hamburger icon on mobile
+        display: none; 
   }
 `
 
@@ -55,7 +56,16 @@ const NavLinks = styled.div`
     gap: 20px;
 `
 
-const Link = styled.a`
+const NavLink = styled.a`
+    color: black;
+    border-bottom: 4px solid transparent;
+    transition: border-bottom 0.5s;
+    &:hover{
+        border-bottom-color: black;
+    }
+`
+
+const CoolerLink = styled(Link)`
     color: black;
     border-bottom: 4px solid transparent;
     transition: border-bottom 0.5s;
@@ -119,7 +129,7 @@ const SimpleNavbar = () => {
     const [SidebarBool, setSidebarBool] = useState(false);
 
     const toggleSidebar = () => {
-        setSidebarBool(!SidebarBool); // Isso seta uma variável que pode ser utilizada em outras partes do código.
+        setSidebarBool(!SidebarBool);
         console.log(SidebarBool)
     };
     return (
@@ -128,7 +138,7 @@ const SimpleNavbar = () => {
               <SidebarLink href="#home" onClick={toggleSidebar}>Sobre o Projeto</SidebarLink>
               <SidebarLink href="#about" onClick={toggleSidebar}>Informações</SidebarLink>
               <SidebarLink href="#services" onClick={toggleSidebar}>Contato</SidebarLink>
-              <SidebarLink href="#contact" onClick={toggleSidebar}>Login</SidebarLink>
+              <SidebarLink href="./login" onClick={toggleSidebar}>Login</SidebarLink>
         </Sidebar>
         <NavbarContainer>
             <LogoDiv>
@@ -136,10 +146,10 @@ const SimpleNavbar = () => {
             </LogoDiv>
             <NavDiv>
                 <NavLinks>
-                    <Link href='#about'>Sobre o Projeto</Link>
-                    <Link href='#info'>Informações</Link>
-                    <Link href='#contact'>Contato</Link>
-                    <Link href='#login'>Login</Link>
+                    <NavLink href='#about'>Sobre o Projeto</NavLink>
+                    <NavLink href='#info'>Informações</NavLink>
+                    <NavLink href='#contact'>Contato</NavLink>
+                    <CoolerLink to='/login'>Login</CoolerLink>
                 </NavLinks>
             </NavDiv>
             <Hamburger onClick={toggleSidebar}>

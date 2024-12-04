@@ -1,25 +1,21 @@
 import React from "react";
-import SimpleNavbar from "./components/SimpleNavbar";
-import Main from "./components/Main";
-import MainAccordion from "./components/Accordion";
-import Textbox from "./components/Textbox";
-import Gallery from "./components/Gallery";
-import Footer from "./components/Footer";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GlobalStyle from "./components/GlobalStyle";
-
-// Use GlobalStyles later
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
     <div>
       <GlobalStyle />
-      <SimpleNavbar />
-      <Main>
-        <Gallery />
-        <Textbox />
-        <MainAccordion />
-      </Main>
-      <Footer />
+      <Router>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/' element={<LandingPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
