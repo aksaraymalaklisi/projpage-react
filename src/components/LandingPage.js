@@ -1,6 +1,6 @@
 import SimpleNavbar from "./SimpleNavbar";
 import Main from "./Main";
-import MainAccordion from "./Accordion";
+import MainAccordion from "./MainAccordion";
 import Textbox from "./Textbox";
 import Gallery from "./Gallery";
 import Footer from "./Footer";
