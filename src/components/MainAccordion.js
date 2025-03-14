@@ -48,7 +48,8 @@ const AccordionContentDiv = styled.div`
 `;
 
 const AccordionBox = styled.div`
-  justify-self: center;
+  display: grid;
+  margin: auto;
   margin-top: 20px;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.5);
