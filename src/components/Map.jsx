@@ -6,6 +6,14 @@ import { MapContainer as LeafletMapContainer, TileLayer, Popup as LeafletPopup, 
 import L from 'leaflet';
 import 'leaflet-gpx';
 import Weather from './Weather';
+import startIcon from '/imgs/dinosaur.png'
+import endIcon from '/imgs/dinosaur.png'
+
+// Import marker icon images
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
 
 const MainBox = styled.div`
   display: flex;
@@ -76,6 +84,14 @@ const Popup = styled(LeafletPopup)`
 }
 `
 
+// Fix the default marker icon issue
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
+
 const GPXLayer = ({ gpxUrl, onDistanceCalculated }) => {
   const map = useMap();
 
@@ -84,20 +100,7 @@ const GPXLayer = ({ gpxUrl, onDistanceCalculated }) => {
 
     // Create a new GPX layer and add it to the map
     const gpxLayer = new L.GPX(gpxUrl, {
-      async: true,
-      wptIconUrls: false,
-      marker_options:{
-        startIcon: new L.Icon({
-          iconUrl: 'dinosaur.png', // Replace with your start icon path
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-        }),
-        endIcon: new L.Icon({
-          iconUrl: 'path/to/end-icon.png', // Replace with your end icon path
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-        }),
-      }
+      async: true
     });
 
     gpxLayer.on('loaded', function(e) {
