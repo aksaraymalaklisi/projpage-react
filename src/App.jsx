@@ -4,6 +4,7 @@ import GlobalStyle from "./components/GlobalStyle";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import LandingPage from "./components/LandingPage";
+import 'leaflet/dist/leaflet.css';
 
 function App() {
   return (

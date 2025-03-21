@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import backgroundImage from '../imgs/background-image-test.jpg';
+import backgroundImage from '/imgs/background-image-test.jpg';
 
 // Main define o fundo do site.
 

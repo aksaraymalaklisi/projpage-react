@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router";
 import styled from 'styled-components';
-import imgLogo from '../imgs/logotemp.jpg'
+import imgLogo from '/imgs/logotemp.jpg'
 
 // Contêiner da navbar
 const NavbarContainer = styled.div`
@@ -18,7 +18,7 @@ const NavbarContainer = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 1001;
 
     @media (max-width: 768px) {
         justify-content: space-between;
