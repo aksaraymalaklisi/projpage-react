@@ -5,15 +5,10 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { MapContainer as LeafletMapContainer, TileLayer, Popup as LeafletPopup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-gpx';
-import Weather from './Weather';
-import startIcon from '/imgs/dinosaur.png'
-import endIcon from '/imgs/dinosaur.png'
-
-// Import marker icon images
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-
+import Weather from './Weather';
 
 const MainBox = styled.div`
   display: flex;
@@ -84,7 +79,7 @@ const Popup = styled(LeafletPopup)`
 }
 `
 
-// Fix the default marker icon issue
+// Fix the default marker icon issue -- Thanks again, ChatGPT.
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -98,7 +93,6 @@ const GPXLayer = ({ gpxUrl, onDistanceCalculated }) => {
   useEffect(() => {
     if (!gpxUrl) return;
 
-    // Create a new GPX layer and add it to the map
     const gpxLayer = new L.GPX(gpxUrl, {
       async: true
     });
@@ -132,11 +126,12 @@ const GPXLayer = ({ gpxUrl, onDistanceCalculated }) => {
 const Map = () => {
   const position = [-22.92, -42.88];
 
+  // Esses arquivos não estão sendo importados corretamente (não respeitam a estrutura do diretório)
   const gpxFiles = [
-    { label: 'Trilha da Pedra do Elefante', url: '/markers/file1.gpx', distance:'1977.43' },
-    { label: 'Trilha da Pedra do Itaocaia', url: '/markers/file2.gpx', distance:'1254.42' },
-    { label: 'Trilha da Pedra do Silvado', url: '/markers/file3.gpx', distance:'1913.42' },
-    { label: 'Trilha da Pedra de Inoã', url: '/markers/file4.gpx', distance:'1906.28' }
+    { label: 'Trilha da Pedra do Elefante', url: './markers/file1.gpx', distance:'1977.43' },
+    { label: 'Trilha da Pedra do Itaocaia', url: './markers/file2.gpx', distance:'1254.42' },
+    { label: 'Trilha da Pedra do Silvado', url: './markers/file3.gpx', distance:'1913.42' },
+    { label: 'Trilha da Pedra de Inoã', url: './markers/file4.gpx', distance:'1906.28' }
   ];
 
   const [currentGpx, setCurrentGpx] = useState(gpxFiles[0].url);
