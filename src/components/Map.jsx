@@ -13,6 +13,7 @@ import Weather from './Weather';
 const MainBox = styled.div`
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   background-color: white;
   border-radius: 16px;
   padding: 20px;
@@ -21,16 +22,19 @@ const MainBox = styled.div`
 
 const MapBox = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
   margin-top: 20px;
   height: 75vh;
   width: 100%;
-  
 `
 const MarkersBox = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100% + 16px);
+  padding-right: 16px;
+  border-radius: 16px;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  height: 100%;
 `
 const ExtrasBox = styled.div`
   display: grid;
@@ -42,21 +46,29 @@ const ExtrasBox = styled.div`
   padding: 16px;
   border-radius: 16px;
   box-shadow: 0 30px 40px 40px rgba(0,0,0,.1);
+  gap: 16px;
 `
 
 const Button = styled.div`
   width: 100%;
-  height: 5rem;
   background-color: #f3f3f3;
   border: none;
   border-radius: 16px;
   margin-bottom: 16px;
   padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
   transition: 0.3s ease;
   cursor: pointer;
   &:hover{
     box-shadow: 0 10px 10px 0px rgba(0,0,0,.1);
   }
+`
+
+const ButtonDescription = styled.div`
+  
 `
 
 const MapContainer = styled(LeafletMapContainer)`
@@ -112,6 +124,10 @@ const GPXLayer = ({ gpxUrl, onDistanceCalculated }) => {
       }
     });
 
+    gpxLayer.on('error', function (e) {
+      console.error('Falha ao carregar arquivo GPX:', e);
+    });
+
     gpxLayer.addTo(map);
 
     // Cleanup: remove the GPX layer on component unmount -- Thanks, ChatGPT.
@@ -123,19 +139,17 @@ const GPXLayer = ({ gpxUrl, onDistanceCalculated }) => {
   return null;
 };
 
+// Esses arquivos não estão sendo importados corretamente (não respeitam a estrutura do diretório)
+const gpxFiles = [
+  { label: 'Trilha da Pedra do Elefante', url: './markers/file1.gpx', distance:'1977.43' },
+  { label: 'Trilha da Pedra do Itaocaia', url: './markers/file2.gpx', distance:'1254.42' },
+  { label: 'Trilha da Pedra do Silvado', url: './markers/file3.gpx', distance:'1913.42' },
+  { label: 'Trilha da Pedra de Inoã', url: './markers/file4.gpx', distance:'1906.28' }
+];
+
 const Map = () => {
   const position = [-22.92, -42.88];
-
-  // Esses arquivos não estão sendo importados corretamente (não respeitam a estrutura do diretório)
-  const gpxFiles = [
-    { label: 'Trilha da Pedra do Elefante', url: './markers/file1.gpx', distance:'1977.43' },
-    { label: 'Trilha da Pedra do Itaocaia', url: './markers/file2.gpx', distance:'1254.42' },
-    { label: 'Trilha da Pedra do Silvado', url: './markers/file3.gpx', distance:'1913.42' },
-    { label: 'Trilha da Pedra de Inoã', url: './markers/file4.gpx', distance:'1906.28' }
-  ];
-
   const [currentGpx, setCurrentGpx] = useState(gpxFiles[0].url);
-  const [trackDistance, setTrackDistance] = useState(null);
 
   return (
       <MainBox>
@@ -149,7 +163,6 @@ const Map = () => {
           {currentGpx && (
             <GPXLayer
               gpxUrl={currentGpx}
-              onDistanceCalculated={(distance) => setTrackDistance(distance)}
             />
           )}
           
@@ -158,9 +171,8 @@ const Map = () => {
           <MarkersBox>
             {gpxFiles.map((file) => (
               <Button key={file.label} onClick={() => setCurrentGpx(file.url)}>
-                <HiOutlineLocationMarker /> {file.label}
-                <br/>
-                <GiPathDistance /> {(file.distance/1000).toFixed(2)} km
+                <ButtonDescription><HiOutlineLocationMarker /> {file.label}</ButtonDescription>
+                <ButtonDescription><GiPathDistance /> {(file.distance/1000).toFixed(2)} km</ButtonDescription>
               </Button>
             ))}
           </MarkersBox>
