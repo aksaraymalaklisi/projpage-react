@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { GiPathDistance } from "react-icons/gi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { CiWarning, CiClock1, CiMountain1 } from "react-icons/ci";
+import { CgArrowsExchangeAltV } from "react-icons/cg";
 import { MapContainer as LeafletMapContainer, TileLayer, Popup as LeafletPopup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-gpx';
@@ -154,10 +156,10 @@ const GPXLayer = ({ gpxUrl, onDistanceCalculated }) => {
 };
 
 const gpxFiles = [
-  { label: 'Trilha da Pedra do Elefante', url: './markers/file1.gpx', distance: '1977.43' },
-  { label: 'Trilha da Pedra do Itaocaia', url: './markers/file2.gpx', distance: '1254.42' },
-  { label: 'Trilha da Pedra do Silvado', url: './markers/file3.gpx', distance: '1913.42' },
-  { label: 'Trilha da Pedra de Inoã', url: './markers/file4.gpx', distance: '1906.28' }
+  { label: 'Trilha da Pedra do Elefante', url: './markers/file1.gpx', distance: '1977.43', difficulty: 'Moderado', duration:'100', routetype:'Ida e Volta', elevation:'233' },
+  { label: 'Trilha da Pedra do Itaocaia', url: './markers/file2.gpx', distance: '1254.42', difficulty: 'Difícil', duration:'90', routetype:'Ida e Volta', elevation:'390' },
+  { label: 'Trilha da Pedra do Silvado', url: './markers/file3.gpx', distance: '1913.42', difficulty: 'Difícil', duration:'300', routetype:'Ida e Volta', elevation:'529' },
+  { label: 'Trilha da Pedra de Inoã', url: './markers/file4.gpx', distance: '1906.28', difficulty: 'Moderado', duration:'90', routetype:'Ida e Volta', elevation:'513' }
 ];
 
 const Map = () => {
@@ -190,7 +192,11 @@ const Map = () => {
                 selected={selectedButton === file.label}
               >
                 <ButtonDescription><HiOutlineLocationMarker /> {file.label}</ButtonDescription>
-                <ButtonDescription><GiPathDistance /> {(file.distance / 1000).toFixed(2)} km</ButtonDescription>
+                <ButtonDescription><GiPathDistance /> {(file.distance*2 / 1000).toFixed(2)} km</ButtonDescription>
+                <ButtonDescription><CiWarning /> {file.difficulty}</ButtonDescription>
+                <ButtonDescription><CiClock1 /> {file.duration} minutos</ButtonDescription>
+                <ButtonDescription><CgArrowsExchangeAltV /> {file.routetype}</ButtonDescription>
+                <ButtonDescription><CiMountain1 /> {file.elevation}m</ButtonDescription>
               </Button>
             ))}
           </MarkersBox>
