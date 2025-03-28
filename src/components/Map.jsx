@@ -186,11 +186,7 @@ const Map = () => {
         <ExtrasBox>
           <MarkersBox>
             {gpxFiles.map((file) => (
-              <Button 
-                key={file.label} 
-                onClick={() => handleButtonClick(file)} 
-                selected={selectedButton === file.label}
-              >
+              <Button key={file.label} onClick={() => handleButtonClick(file)} selected={selectedButton === file.label}>
                 <ButtonDescription><HiOutlineLocationMarker /> {file.label}</ButtonDescription>
                 <ButtonDescription><GiPathDistance /> {(file.distance*2 / 1000).toFixed(2)} km</ButtonDescription>
                 <ButtonDescription><CiWarning /> {file.difficulty}</ButtonDescription>
