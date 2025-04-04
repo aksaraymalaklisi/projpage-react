@@ -103,7 +103,7 @@ const Sidebar = styled.div`
     left: 0;
     height: 100%;
     width: ${({ $SidebarBool }) => ($SidebarBool ? '250px' : '0px')};
-    z-index: 1001;
+    z-index: 1002;
     overflow: hidden;
 
     // Assegurar que a sidebar seja eliminada se a tela subitamente voltar ao normal.
