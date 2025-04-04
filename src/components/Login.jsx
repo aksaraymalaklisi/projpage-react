@@ -48,14 +48,23 @@ const Button = styled.button`
 `;
 
 const StyledLink = styled(Link)`
-display: block;
-margin-top: 15px;
-color: #000000;
-text-decoration: none;
-font-size: 12px;
-&:hover {
-    text-decoration: underline;
-}
+    display: block;
+    margin-top: 15px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 12px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        margin: 15px auto;
+        width: 90%;
+        border-radius: 4px;
+        border: 1px solid #c2c2c2;
+        padding: 10px;
+    }
 `;
 
 function Login() {
