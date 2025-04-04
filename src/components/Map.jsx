@@ -10,6 +10,18 @@ import 'leaflet-gpx';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import locationpin from '/markers_icons/location-pin.png'
+import locationflag from '/markers_icons/flag.png'
+import track1 from '/markers/file1.gpx?url';
+import track2 from '/markers/file2.gpx?url';
+import track3 from '/markers/file3.gpx?url';
+import track4 from '/markers/file4.gpx?url';
+import track5 from '/markers/file5.gpx?url'; 
+import track6 from '/markers/file6.gpx?url';
+import track7 from '/markers/file7.gpx?url';
+import track8 from '/markers/file8.gpx?url';
+import track9 from '/markers/file9.gpx?url';
+import track10 from '/markers/file10.gpx?url'; // Misericórdia.
 import Weather from './Weather';
 
 const MainBox = styled.div`
@@ -24,9 +36,18 @@ const MainBox = styled.div`
 
 const MapBox = styled.div`
   display: flex;
-  margin-top: 20px;
+  flex-direction: row;
+  margin-top: 16px;
   height: 75vh;
   width: 100%;
+
+  @media (max-width: 760px) {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    justify-items: center;
+    height: 100vh;
+  }
 `;
 
 const MarkersBox = styled.div`
@@ -38,6 +59,13 @@ const MarkersBox = styled.div`
   overflow-y: auto; 
   overflow-x: hidden; 
   height: 100%;
+
+  @media (max-width: 760px) {
+    display: flex;
+    width: calc(100% + 16px);
+    overflow-x: auto; 
+    gap: 8px;
+  }
 `;
 
 const ExtrasBox = styled.div`
@@ -51,6 +79,11 @@ const ExtrasBox = styled.div`
   border-radius: 16px;
   box-shadow: 0 30px 40px 40px rgba(0,0,0,.1);
   gap: 16px;
+  
+  @media (max-width: 760px) {
+    margin-left: 0px;
+    width: 100%;
+  }
 `;
 
 const Button = styled.div`
@@ -71,6 +104,13 @@ const Button = styled.div`
   &:hover {
     box-shadow: 0 10px 10px 0px rgba(0,0,0,.1);
   }
+
+  @media (max-width: 760px) {
+    gap: 4px;
+    padding: 12px; // Reduce padding for smaller screens
+    margin-bottom: 12px; // Reduce margin for smaller screens
+    font-size: 14px; // Optionally adjust font size
+  }
 `;
 
 const ButtonDescription = styled.div``;
@@ -78,7 +118,7 @@ const ButtonDescription = styled.div``;
 const MapContainer = styled(LeafletMapContainer)`
   border-radius: 16px;
   height: 100%;
-  width: 75%;
+  width: 100%;
 `;
 
 const Popup = styled(LeafletPopup)`
@@ -114,12 +154,12 @@ const GPXLayer = ({ gpxUrl, onDistanceCalculated }) => {
       async: true,
       marker_options: {
         startIcon: new L.Icon({
-          iconUrl: '/markers_icons/location-pin.png',
+          iconUrl: locationpin,
           iconSize: [48, 48],
           iconAnchor: [23, 44],
         }),
         endIcon: new L.Icon({
-          iconUrl: '/markers_icons/flag.png',
+          iconUrl: locationflag,
           iconSize: [48, 48],
           iconAnchor: [3, 48],
         }),
@@ -156,10 +196,16 @@ const GPXLayer = ({ gpxUrl, onDistanceCalculated }) => {
 };
 
 const gpxFiles = [
-  { label: 'Trilha da Pedra do Elefante', url: './markers/file1.gpx', distance: '1977.43', difficulty: 'Moderado', duration:'100', routetype:'Ida e Volta', elevation:'233' },
-  { label: 'Trilha da Pedra do Itaocaia', url: './markers/file2.gpx', distance: '1254.42', difficulty: 'Difícil', duration:'90', routetype:'Ida e Volta', elevation:'390' },
-  { label: 'Trilha da Pedra do Silvado', url: './markers/file3.gpx', distance: '1913.42', difficulty: 'Difícil', duration:'300', routetype:'Ida e Volta', elevation:'529' },
-  { label: 'Trilha da Pedra de Inoã', url: './markers/file4.gpx', distance: '1906.28', difficulty: 'Moderado', duration:'90', routetype:'Ida e Volta', elevation:'513' }
+  { label: 'Trilha da Pedra do Elefante', url: track1, distance: '1977.43', difficulty: 'Moderado', duration:'100', routetype:'ida_volta', elevation:'233' },
+  { label: 'Trilha da Pedra do Itaocaia', url: track2, distance: '1254.42', difficulty: 'Difícil', duration:'90', routetype:'ida_volta', elevation:'390' },
+  { label: 'Trilha da Pedra do Silvado', url: track3, distance: '1913.42', difficulty: 'Difícil', duration:'300', routetype:'ida_volta', elevation:'529' },
+  { label: 'Trilha da Pedra de Inoã', url: track4, distance: '1906.28', difficulty: 'Moderado', duration:'90', routetype:'ida_volta', elevation:'513' },
+  { label: 'Trilha da Pedra de Macaco', url: track5, distance: '710.24', difficulty: 'Fácil', duration:'40', routetype:'ida_volta', elevation:'246' },
+  { label: 'Trilha dos Espraiado/Tomascar', url: track6, distance: '4347.83', difficulty: 'Difícil', duration: '120', routetype: 'ida_volta', elevation: '555' },
+  { label: 'Trilha Caminhos de Darwin', url: track7, distance: '6375.64', difficulty: 'Fácil', duration: '120', routetype: 'ida', elevation: '386' },
+  { label: 'Trilha de Acesso ao Pico da Lagoinha', url: track8, distance: '4300.00', difficulty: 'Difícil', duration: '300', routetype: 'ida_volta', elevation: '653' },
+  { label: 'Trilha de Travessia Silvado x Espraiado', url: track9, distance: '9966.04', difficulty: 'Difícil', duration: '150', routetype: 'ida', elevation: '521' },
+  { label: 'Trilha da Cachoeira do Segredo em Silvado', url: track10, distance: '3960.64', difficulty: 'Moderada', duration: '120', routetype: 'ida_volta', elevation: '220' }
 ];
 
 const Map = () => {
@@ -188,10 +234,10 @@ const Map = () => {
             {gpxFiles.map((file) => (
               <Button key={file.label} onClick={() => handleButtonClick(file)} selected={selectedButton === file.label}>
                 <ButtonDescription><HiOutlineLocationMarker /> {file.label}</ButtonDescription>
-                <ButtonDescription><GiPathDistance /> {(file.distance*2 / 1000).toFixed(2)} km</ButtonDescription>
+                <ButtonDescription><GiPathDistance /> {file.routetype == 'ida_volta' ? (file.distance*2 / 1000).toFixed(2) : (file.distance / 1000).toFixed(2)} km</ButtonDescription>
                 <ButtonDescription><CiWarning /> {file.difficulty}</ButtonDescription>
                 <ButtonDescription><CiClock1 /> {file.duration} minutos</ButtonDescription>
-                <ButtonDescription><CgArrowsExchangeAltV /> {file.routetype}</ButtonDescription>
+                <ButtonDescription><CgArrowsExchangeAltV /> {file.routetype == 'ida_volta' ? 'Ida e Volta' : 'Ida'}</ButtonDescription>
                 <ButtonDescription><CiMountain1 /> {file.elevation}m</ButtonDescription>
               </Button>
             ))}

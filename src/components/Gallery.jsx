@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import img1 from '/imgs/paisagem1.jpg'
-import img2 from '/imgs/paisagem3.jpg'
-import img3 from '/imgs/paisagem4.jpg'
-import img4 from '/imgs/topo-da-pedra-do-macaco.jpg'
-import img5 from '/imgs/trilha-marica.jpg'
-import img6 from '/imgs/trilha-silvado.jpg'
-import img7 from '/imgs/tempimage.webp'
-import img8 from '/imgs/background-image-test.jpg'
+import img1 from '/imgs/paisagem1.jpg';
+import img2 from '/imgs/paisagem3.jpg';
+import img3 from '/imgs/paisagem4.jpg';
+import img4 from '/imgs/topo-da-pedra-do-macaco.jpg';
+import img5 from '/imgs/trilha-marica.jpg';
+import img6 from '/imgs/trilha-silvado.jpg';
+import img7 from '/imgs/tempimage.webp';
+import img8 from '/imgs/background-image-test.jpg';
 
 const GalleryContainer = styled.div`
     display: grid;
@@ -19,6 +19,10 @@ const GalleryContainer = styled.div`
     align-items: center;
     padding: 20px;
     gap: 20px;
+
+    @media (max-width: 760px) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 `;
 
 const ImageThumbnail = styled.img`

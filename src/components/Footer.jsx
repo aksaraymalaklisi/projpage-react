@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import logo from "/imgs/dinosaur.png"
-import social1logo from "/imgs/icons8-instagram.svg"
-import social2logo from "/imgs/icons8-twitter.svg"
-import social3logo from "/imgs/icons8-facebook.svg"
-import social4logo from "/imgs/icons8-whatsapp.svg"
+import logo from "/imgs/dinosaur.png";
+import social1logo from "/imgs/icons8-instagram.svg";
+import social2logo from "/imgs/icons8-twitter.svg";
+import social3logo from "/imgs/icons8-facebook.svg";
+import social4logo from "/imgs/icons8-whatsapp.svg";
 
 // Form section
 const FooterForm = styled.div`
